@@ -2,17 +2,29 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\CamisetaFormType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CamisetaController extends AbstractController
 {
-    #[Route(path:"/crear/camiseta", name:"crearCamiseta")]
-    public function crearCamiseta(): Response
+    #[Route(path: "/crear/camiseta", name: "crearCamiseta")]
+    public function crearCamiseta(Request $request, EntityManagerInterface $entityManager, CamisetaFormType $camisetaform): Response
     {
-        return $this->render('page/camisetes/camisetes.html.twig', [
+        $form = $this->createForm(CamisetaFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $camiseta = $form->getData();
+            $entityManager->persist($camiseta);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_admin');
+        }
+        return $this->render('page/camisetes/creaciocamisetes.html.twig', [
             'controller_name' => 'CamisetaController',
+            'camisetaform' => $form->createView()
         ]);
     }
     #[Route('/camiseta/{id}', name: 'camiseta')]

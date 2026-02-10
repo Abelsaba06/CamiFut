@@ -9,5 +9,12 @@
             <button id="crearCategoria">Crear Categoria</button>
             <div id="categoriaparacrear"></div>
         </section>
+        <section class="category-grid">
+            {% for camiseta in camisetas %}
+                <div class="category-card">{{camiseta.equipo}}</div> 
+            {% endfor %}
+            <button id="crearCamiseta" onclick="path{route('crearCamiseta')}">Crear Camiseta</button>
+            <div id="camisetaparacrear"></div>
+        </section>
     </main>
 {% endblock %}

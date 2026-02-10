@@ -11,5 +11,5 @@ function crearCategoria() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre: nombre })
-    }).then(response => response.json()).then(() => window.location.reload())
+    }).then(response => response.json()).then(window.location.reload())
 }
