@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
-{% block title %}Camiseta{% endblock %}
+{% block title %}Camifut{% endblock %}
 {% block body %}
     <main>
         <section class="hero-banner">
             <h1>Benvinguts a CamiFut</h1>
             <p>(Xicoteta descripció explicant el temps de duració del envio de camisetes)</p>
         </section>
-
         <section class="category-grid">
-            <div class="category-card">Camisetes de LaLiga</div> <div class="category-card">Camisetes de Premier</div> <div class="category-card">Camisetes de Bundesliga</div> <div class="category-card">Camisetes de LigueOne</div> <div class="category-card">Camisetes de SerieA</div> <div class="category-card">Camisetes Retro</div> </section>
+        {% for categoria in categorias %}
+            <div class="category-card">{{categoria.nombre}}</div> 
+        {% endfor %}
+        </section>
     </main>
 {% endblock %}

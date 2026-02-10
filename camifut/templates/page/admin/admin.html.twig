@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
-{% block title %}Camiseta{% endblock %}
+{% block title %}Zona Admin{% endblock %}
 {% block body %}
     <main>
-        
+        <section class="category-grid">
+            {% for categoria in categorias %}
+                <div class="category-card">{{categoria.nombre}}</div> 
+            {% endfor %}
+            <button id="crearCategoria">Crear Categoria</button>
+            <div id="categoriaparacrear"></div>
+        </section>
     </main>
 {% endblock %}

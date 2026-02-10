@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Camisetas - CamiFut{% endblock %}
+
+{% block body %}
+    
+    <section class="search-section">
+        <div class="container">
+            <form action="#" method="get" class="search-form">
+                <input type="text" name="q" placeholder="Buscar camiseta (ej: Barça, Madrid, Retro...)" class="form-control search-input">
+                <button type="submit" class="btn btn-primary-camifut">Buscar</button>
+            </form>
+        </div>
+    </section>
+
+    <main class="container my-5">
+        
+        <div class="products-grid">
+            {# SIMULACIÓN DE DATOS (Esto luego vendrá de tu Base de Datos) #}
+            {% set productos_demo = [
+                {'nombre': 'Camiseta FC Barcelona', 'precio': '35.00€'},
+                {'nombre': 'Camiseta Real Madrid', 'precio': '35.00€'},
+                {'nombre': 'Camiseta AC Milan Retro', 'precio': '40.00€'},
+                {'nombre': 'Camiseta Arsenal', 'precio': '35.00€'},
+                {'nombre': 'Camiseta Boca Juniors', 'precio': '38.00€'},
+                {'nombre': 'Camiseta PSG', 'precio': '35.00€'},
+                {'nombre': 'Camiseta Bayern Munich', 'precio': '35.00€'},
+                {'nombre': 'Camiseta Inter Miami', 'precio': '42.00€'}
+            ] %}
+
+            {# Bucle para generar las tarjetas #}
+            {% for producto in productos_demo %}
+                <article class="product-card">
+                    <a href="#" class="product-link">
+                        <div class="card-image-container">
+                            <span class="placeholder-text">Imatge</span>
+                        </div>
+                        <div class="card-info">
+                            <h3>{{ producto.nombre }}</h3>
+                            <div class="price-tag">{{ producto.precio }}</div>
+                            <button class="btn-buy">Veure Detalls</button>
+                        </div>
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+
+        <div class="pagination-container mt-5">
+            <nav aria-label="Navegación de páginas">
+                <ul class="pagination justify-content-center custom-pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1"><i class="bi bi-arrow-left"></i> Anterior</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Siguiente <i class="bi bi-arrow-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </main>
+{% endblock %}

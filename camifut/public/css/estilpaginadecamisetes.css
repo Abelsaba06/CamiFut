@@ -1,0 +1,129 @@
+/* --- ESTILS DE LA LLISTA DE PRODUCTES --- */
+
+/* 1. Cercador (Barra Grisa) */
+.search-section {
+    background-color: #cbd5e1; /* Gris mitjà del wireframe */
+    border-bottom: 2px solid #000;
+    padding: 20px 0;
+    margin-bottom: 40px;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.search-input {
+    border: 2px solid #000;
+    padding: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    border-radius: 0; /* Vores quadrades estil wireframe */
+}
+
+/* 2. Graella de Productes (Fent les targetes GRANS) */
+.products-grid {
+    display: grid;
+    /* Això crea columnes que mesuren MÍNIM 280px. 
+       Si la pantalla és gran, s'estiren per a ocupar l'espai. */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 30px; /* Espai entre targetes */
+    padding: 10px;
+}
+
+/* 3. Targeta de Producte */
+.product-card {
+    border: 2px solid #000;
+    background-color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 0px rgba(0,0,0,1); /* Ombra dura negra */
+}
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Contenidor de la imatge (Fent-lo alt) */
+.card-image-container {
+    background-color: #f1f5f9; /* Gris molt claret */
+    height: 300px; /* Altura fixa gran perquè la samarreta es veja bé */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #64748b;
+}
+
+/* Informació de la targeta */
+.card-info {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-info h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--color-primario);
+}
+
+.price-tag {
+    font-size: 1.8rem; /* Preu gran */
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.btn-buy {
+    background-color: var(--color-boton);
+    border: 2px solid #000;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-buy:hover {
+    background-color: var(--color-boton-hover);
+}
+
+/* 4. Paginació Personalitzada */
+.custom-pagination .page-link {
+    border: 2px solid #000;
+    color: #000;
+    margin: 0 5px;
+    font-weight: bold;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.custom-pagination .page-item.active .page-link {
+    background-color: var(--color-primario);
+    border-color: #000;
+    color: var(--color-boton); /* Text groc en l'actiu */
+}
+
+.custom-pagination .page-link:hover {
+    background-color: var(--color-boton);
+    color: #000;
+}
