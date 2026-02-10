@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block title %}Camiseta{% endblock %}
+{% block body %}
+    <main>
+        <div class="product-container">
+            
+            <div class="product-image">
+                imatge de la camiseta
+            </div>
+
+            <div class="product-details">
+                <h3>Talla (elegida)</h3>
+                <div class="size-selector">
+                    <button class="size-btn">S</button>
+                    <button class="size-btn">M</button>
+                    <button class="size-btn active">L</button> <button class="size-btn">XL</button>
+                    <button class="size-btn">2XL</button>
+                    <button class="size-btn">3XL</button>
+                </div>
+
+                <h3>Personalización</h3>
+                <div class="size-selector">
+                    <button class="option-btn">Personalizar</button>
+                    <button class="option-btn">No personalizar</button>
+                </div>
+
+                <h3>Parches:</h3>
+                <div class="size-selector">
+                    <select class="custom-input" style="width: auto;">
+                        <option>Competición A</option>
+                        <option>Competición B</option>
+                    </select>
+                    <select class="custom-input" style="width: auto;">
+                        <option>Parche Campeón</option>
+                    </select>
+                    <button class="option-btn">Sin parche</button>
+                </div>
+
+                <div class="custom-form">
+                    <p>Formulari si vols personalitzar la camiseta</p>
+                    <input type="text" placeholder="Nombre" class="custom-input">
+                    <input type="number" placeholder="Dorsal" class="custom-input">
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-primary">Afegeix al carret</button>
+                </div>
+            </div>
+
+            <div class="size-guide">
+                <h3>Medida de les talles</h3>
+                <br>
+                <table class="size-table">
+                    <thead>
+                        <tr>
+                            <th>Talla</th>
+                            <th>Ample (cm)</th>
+                            <th>Llarg (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S</td>
+                            <td>50</td>
+                            <td>69</td>
+                        </tr>
+                        <tr>
+                            <td>M</td>
+                            <td>53</td>
+                            <td>71</td>
+                        </tr>
+                        <tr>
+                            <td>L</td>
+                            <td>56</td>
+                            <td>73</td>
+                        </tr>
+                        <tr>
+                            <td>XL</td>
+                            <td>58</td>
+                            <td>75</td>
+                        </tr>
+                        <tr>
+                            <td>2XL</td>
+                            <td>60</td>
+                            <td>77</td>
+                        </tr>
+                        <tr>
+                            <td>3XL</td>
+                            <td>62</td>
+                            <td>79</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}
