@@ -13,7 +13,7 @@
             {% for camiseta in camisetas %}
                 <div class="category-card">{{camiseta.equipo}}</div> 
             {% endfor %}
-            <button id="crearCamiseta" onclick="path{route('crearCamiseta')}">Crear Camiseta</button>
+            <button id="crearCamiseta"><a href="{{path('crearCamiseta')}}">Crear Camiseta</a></button>
             <div id="camisetaparacrear"></div>
         </section>
     </main>

@@ -9,17 +9,27 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Vich\UploaderBundle\Form\Type\ImageFileType;
-
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 class CamisetaFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('equipo')
-            ->add('imagen', ImageFileType::class, [
-                'upload_dir' => 'public/img',
-                'base_path' => '/img/',
+            ->add('imagen', FileType::class, [
+                'label' => 'Imagen (Fichero JPG o PNG)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new \Symfony\Component\Validator\Constraints\File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid image (JPEG/PNG)',
+                    ])
+                ],
             ])
             ->add('temporada')
             ->add('precio')
