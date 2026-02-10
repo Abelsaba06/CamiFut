@@ -1,52 +1,106 @@
 {% extends 'base.html.twig' %}
-{% block title %}Camiseta{% endblock %}
+
+{% block title %}{{ camiseta.equipo }}{% endblock %}
+
 {% block body %}
     <main>
         <div class="product-container">
             
+            {# COLUMNA IZQUIERDA: IMAGEN #}
             <div class="product-image">
-                imatge de la camiseta
+                {# Asumiendo que guardas las imágenes en public/uploads o similar #}
+                <img src="{{ asset('img/' ~ camiseta.imagen) }}" alt="{{ camiseta.equipo }}" style="max-width: 100%; height: auto;">
             </div>
 
+            {# COLUMNA DERECHA: DETALLES #}
             <div class="product-details">
+                
+                {# Título y Precio (Añadido porque es vital en una ficha de producto) #}
+                <h1>{{ camiseta.equipo }} {{camiseta.temporada}}</h1>
+                <h2 style="color: #333;">{{ camiseta.precio }} €</h2>
+                {% if camiseta.descripcion is defined %}
+                    <p>{{ camiseta.descripcion }}</p>
+                {% endif %}
+
+                {# IMPORTANTE: Para enviar datos al carrito, normalmente necesitas un <form> #}
+                
+            </div>
+             <div class="product-details">
+
                 <h3>Talla (elegida)</h3>
+
                 <div class="size-selector">
+
                     <button class="size-btn">S</button>
+
                     <button class="size-btn">M</button>
+
                     <button class="size-btn active">L</button> <button class="size-btn">XL</button>
+
                     <button class="size-btn">2XL</button>
+
                     <button class="size-btn">3XL</button>
+
                 </div>
+
+
 
                 <h3>Personalización</h3>
+
                 <div class="size-selector">
+
                     <button class="option-btn">Personalizar</button>
+
                     <button class="option-btn">No personalizar</button>
+
                 </div>
+
+
 
                 <h3>Parches:</h3>
+
                 <div class="size-selector">
+
                     <select class="custom-input" style="width: auto;">
+
                         <option>Competición A</option>
+
                         <option>Competición B</option>
+
                     </select>
+
                     <select class="custom-input" style="width: auto;">
+
                         <option>Parche Campeón</option>
+
                     </select>
+
                     <button class="option-btn">Sin parche</button>
+
                 </div>
+
+
 
                 <div class="custom-form">
+
                     <p>Formulari si vols personalitzar la camiseta</p>
+
                     <input type="text" placeholder="Nombre" class="custom-input">
+
                     <input type="number" placeholder="Dorsal" class="custom-input">
+
                 </div>
+
+
 
                 <div class="action-buttons">
-                    <button class="btn-primary">Afegeix al carret</button>
-                </div>
-            </div>
 
+                    <button class="btn-primary">Afegeix al carret</button>
+
+                </div>
+
+            </div>
+            {# GUIA DE TALLAS (ESTÁTICA) #}
             <div class="size-guide">
                 <h3>Medida de les talles</h3>
                 <br>
@@ -59,39 +113,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>S</td>
-                            <td>50</td>
-                            <td>69</td>
-                        </tr>
-                        <tr>
-                            <td>M</td>
-                            <td>53</td>
-                            <td>71</td>
-                        </tr>
-                        <tr>
-                            <td>L</td>
-                            <td>56</td>
-                            <td>73</td>
-                        </tr>
-                        <tr>
-                            <td>XL</td>
-                            <td>58</td>
-                            <td>75</td>
-                        </tr>
-                        <tr>
-                            <td>2XL</td>
-                            <td>60</td>
-                            <td>77</td>
-                        </tr>
-                        <tr>
-                            <td>3XL</td>
-                            <td>62</td>
-                            <td>79</td>
-                        </tr>
+                        <tr><td>S</td><td>50</td><td>69</td></tr>
+                        <tr><td>M</td><td>53</td><td>71</td></tr>
+                        <tr><td>L</td><td>56</td><td>73</td></tr>
+                        <tr><td>XL</td><td>58</td><td>75</td></tr>
+                        <tr><td>2XL</td><td>60</td><td>77</td></tr>
+                        <tr><td>3XL</td><td>62</td><td>79</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </main>
+
+    {# Script simple para actualizar el input oculto de talla al hacer click #}
+    <script>
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Quitar clase active de todos
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                // Poner active al clickado
+                this.classList.add('active');
+                // Actualizar el input oculto
+                document.getElementById('talla-seleccionada').value = this.innerText;
+            });
+        });
+    </script>
 {% endblock %}

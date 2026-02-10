@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\CamisetaFormType;
+use App\Repository\CamisetaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,10 +29,11 @@ final class CamisetaController extends AbstractController
         ]);
     }
     #[Route('/camiseta/{id}', name: 'camiseta')]
-    public function index(): Response
+    public function index(int $id, CamisetaRepository $camisetaRepository): Response
     {
-        return $this->render('camiseta/index.html.twig', [
-            'controller_name' => 'CamisetaController',
+        $camiseta = $camisetaRepository->find($id);
+        return $this->render('page/camisetes/detall.html.twig', [
+            'camiseta' => $camiseta
         ]);
     }
 }
