@@ -12,8 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CategoriaController extends AbstractController
 {
-    #[Route('/categoria', name: 'categoria')]
-    public function index(): Response
+    #[Route('/categoria/{id}', name: 'categoria')]
+    public function index(int $id): Response
     {
         return $this->render('page/camisetes/camisetes.html.twig', [
             'controller_name' => 'CategoriaController',
@@ -25,6 +25,7 @@ final class CategoriaController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $categoria=new Categoria();
         $categoria->setNombre($data['nombre']);
+        $entityManager->persist($categoria);
         $entityManager->flush();
         return new JsonResponse($categoria->getId());
     }

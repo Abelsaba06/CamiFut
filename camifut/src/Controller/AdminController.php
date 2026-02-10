@@ -12,7 +12,6 @@ final class AdminController extends AbstractController
     #[Route('/admin', name: 'app_admin')]
     public function index(CategoriaRepository $categoriaRepository): Response
     {
-        
         $categorias=$categoriaRepository->findAll();
         return $this->render('/page/admin/admin.html.twig', ['categorias'=>$categorias]);
     }

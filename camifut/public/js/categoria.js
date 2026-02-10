@@ -1,11 +1,15 @@
 if (document.getElementById("crearCategoria")) {
-    document.getElementById("crearCategoria").click=crearCategoria
+    document.getElementById("crearCategoria").onclick = mostrarCategoriacreacion
+}
+function mostrarCategoriacreacion() {
+    document.getElementById("categoriaparacrear").innerHTML = "<input id='categorianueva' type='text'><button id=guardar>Guardar</button>"
+    document.getElementById("guardar").onclick = crearCategoria
 }
 function crearCategoria() {
-    document.getElementById("categoriaparacrear").innerHTML="<input id='categorianueva' type='text'>"
-    fetch("/categoria/crear"),{
+    let nombre = document.getElementById("categorianueva").value
+    fetch("/categoria/crear", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre:document.getElementById("categorianueva").value}).then(response => response.json())
-    }
+        body: JSON.stringify({ nombre: nombre })
+    }).then(response => response.json()).then(() => window.location.reload())
 }
