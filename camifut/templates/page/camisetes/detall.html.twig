@@ -44,21 +44,12 @@
                 </div>
 
 
-
-                <h3>Personalización</h3>
-
+                <h3>Personalització</h3>
                 <div class="size-selector">
-
-                    <button class="option-btn">Personalizar</button>
-
-                    <button class="option-btn">No personalizar</button>
-
+                    <button class="option-btn">Personalitzar</button>
+                    <button class="option-btn">No personalitzar</button>
                 </div>
-
-
-
                 <h3>Parches:</h3>
-
                 <div class="size-selector">
 
                     <select class="custom-input" style="width: auto;">
@@ -124,18 +115,4 @@
             </div>
         </div>
     </main>
-
-    {# Script simple para actualizar el input oculto de talla al hacer click #}
-    <script>
-        document.querySelectorAll('.size-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Quitar clase active de todos
-                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-                // Poner active al clickado
-                this.classList.add('active');
-                // Actualizar el input oculto
-                document.getElementById('talla-seleccionada').value = this.innerText;
-            });
-        });
-    </script>
 {% endblock %}
