@@ -67,7 +67,12 @@
     font-weight: bold;
     color: #64748b;
 }
-
+/*Estils per a la imatge que es mostra en la targeta*/
+.card-image-container img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /*Això fa que la imatge es mostri bé*/
+}
 /* Informació de la targeta */
 .card-info {
     padding: 20px;
@@ -106,24 +111,4 @@
 
 .btn-buy:hover {
     background-color: var(--color-boton-hover);
-}
-
-/* 4. Paginació Personalitzada */
-.custom-pagination .page-link {
-    border: 2px solid #000;
-    color: #000;
-    margin: 0 5px;
-    font-weight: bold;
-    font-family: 'Rajdhani', sans-serif;
-}
-
-.custom-pagination .page-item.active .page-link {
-    background-color: var(--color-primario);
-    border-color: #000;
-    color: var(--color-boton); /* Text groc en l'actiu */
-}
-
-.custom-pagination .page-link:hover {
-    background-color: var(--color-boton);
-    color: #000;
 }

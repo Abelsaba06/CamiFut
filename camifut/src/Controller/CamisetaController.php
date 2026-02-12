@@ -28,6 +28,14 @@ final class CamisetaController extends AbstractController
             'camisetaform' => $form->createView()
         ]);
     }
+    #[Route(path:'camisetes', name:'camisetes')]
+    public function camisetes(CamisetaRepository $camisetaRepository): Response
+    {
+        $camisetas = $camisetaRepository->findAll();
+        return $this->render('page/camisetes/camisetes.html.twig', [
+            'camisetas' => $camisetas
+        ]);
+    }
     #[Route('/camiseta/{id}', name: 'camiseta')]
     public function index(int $id, CamisetaRepository $camisetaRepository): Response
     {
