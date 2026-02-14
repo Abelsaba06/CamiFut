@@ -8,7 +8,7 @@
         </section>
         <section class="category-grid">
         {% for categoria in categorias %}
-            <div class="category-card">{{categoria.nombre}}</div> 
+            <div class="category-card"><a href="{{path('categoria', {'nombre': categoria.nombre})}}">{{categoria.nombre}}</a></div> 
         {% endfor %}
         </section>
     </main>

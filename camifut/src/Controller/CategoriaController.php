@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Categoria;
+use App\Entity\Camiseta;
+use App\Repository\CategoriaRepository;
+use App\Repository\CamisetaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,11 +26,13 @@ final class CategoriaController extends AbstractController
         $entityManager->flush();
         return new JsonResponse($categoria->getId());
     }
-    #[Route('/categoria/{id}', name: 'categoria')]
-    public function index(int $id): Response
+    #[Route('/categoria/{nombre}', name: 'categoria')]
+    public function index(CategoriaRepository $categoriaRepository, string $nombre, CamisetaRepository $camisetaRepository): Response
     {
+        $categoria = $categoriaRepository->findOneBy(['nombre' => $nombre]);
+        $camisetas = $camisetaRepository->findBy(['categoria' => $categoria->getId()]);
         return $this->render('page/camisetes/camisetes.html.twig', [
-            'controller_name' => 'CategoriaController',
+            'camisetas' => $camisetas,
         ]);
     }
 }
