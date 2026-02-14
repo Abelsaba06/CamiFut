@@ -28,7 +28,7 @@ final class CamisetaController extends AbstractController
             'camisetaform' => $form->createView()
         ]);
     }
-    #[Route(path:'camisetes', name:'camisetes')]
+    #[Route(path: '/camisetes', name: 'camisetes')]
     public function camisetes(CamisetaRepository $camisetaRepository): Response
     {
         $camisetas = $camisetaRepository->findAll();

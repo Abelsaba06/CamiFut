@@ -6,15 +6,14 @@
             {% for categoria in categorias %}
                 <div class="category-card">{{categoria.nombre}}</div> 
             {% endfor %}
-            <button id="crearCategoria">Crear Categoria</button>
+            <div class="category-card"><button id="crearCategoria">Crear Categoria</button></div> 
             <div id="categoriaparacrear"></div>
         </section>
         <section class="category-grid">
             {% for camiseta in camisetas %}
                 <div class="category-card">{{camiseta.equipo}}</div> 
             {% endfor %}
-            <button id="crearCamiseta"><a href="{{path('crearCamiseta')}}">Crear Camiseta</a></button>
-            <div id="camisetaparacrear"></div>
+            <div class="category-card"><a href="{{path('crearCamiseta')}}">Crear Camiseta</a></div> 
         </section>
     </main>
 {% endblock %}
