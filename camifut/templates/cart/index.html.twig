@@ -28,7 +28,7 @@
                         {% for item in items %}
                             <tr>
                                 <td class="product-cell" data-label="Producte">
-                                    <img src="{{ asset('img/' ~ item.product.imagen) }}" alt="{{ item.product.equipo }}" class="cart-product-img">
+                                    <img src="{{ asset('img/' ~ (item.product.categoria ? item.product.categoria.nombre ~ '/' : '') ~ item.product.imagen) }}" alt="{{ item.product.equipo }}" class="cart-product-img">
                                     <div class="cart-product-info">
                                         <h3>{{ item.product.equipo }}</h3>
                                         <p>{{ item.product.temporada }}</p>

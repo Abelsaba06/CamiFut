@@ -11,7 +11,7 @@
             {# COLUMNA IZQUIERDA: IMAGEN #}
             <div class="product-image">
                 {# Asumiendo que guardas las imágenes en public/uploads o similar #}
-                <img src="{{ asset('img/' ~ camiseta.imagen) }}" alt="{{ camiseta.equipo }}" style="max-width: 100%; height: auto;">
+                <img src="{{ asset('img/' ~ (camiseta.categoria ? camiseta.categoria.nombre ~ '/' : '') ~ camiseta.imagen) }}" alt="{{ camiseta.equipo }}" style="max-width: 100%; height: auto;">
             </div>
             {# COLUMNA DERECHA: DETALLES #}
             
