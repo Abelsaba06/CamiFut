@@ -1,20 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!{% endblock %}
+{% block title %}El teu carret - CamiFut{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/alumno/Desktop/Q_10_Sabater_Muñoz_Abel/camifut/src/Controller/CartController.php</code></li>
-        <li>Your template at <code>/home/alumno/Desktop/Q_10_Sabater_Muñoz_Abel/camifut/templates/cart/index.html.twig</code></li>
-    </ul>
-</div>
+    <div class="cart-container">
+        <h1>El teu carret</h1>
+        
+        {% if items is empty %}
+            <div class="empty-cart">
+                <p>El teu carret està buit.</p>
+                <a href="{{ path('camisetes') }}" class="btn-primary">Veure camisetes</a>
+            </div>
+        {% else %}
+            <form action="#" method="post">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Producte</th>
+                            <th>Detalls</th>
+                            <th>Preu</th>
+                            <th>Quantitat</th>
+                            <th>Total</th>
+                            <th>Accions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                            <tr>
+                                <td class="product-cell">
+                                    <img src="{{ asset('img/' ~ item.product.imagen) }}" alt="{{ item.product.equipo }}" class="cart-product-img">
+                                    <div class="cart-product-info">
+                                        <h3>{{ item.product.equipo }}</h3>
+                                        <p>{{ item.product.temporada }}</p>
+                                    </div>
+                                </td>
+                                <td class="details-cell">
+                                    <p><strong>Talla:</strong> {{ item.size }}</p>
+                                    {% if item.personalization %}
+                                        <p><strong>Personalització:</strong> {{ item.personalization }}</p>
+                                    {% endif %}
+                                    {% if item.patches and item.patches != 'Sense parche' %}
+                                        <p><strong>Parche:</strong> {{ item.patches }}</p>
+                                    {% endif %}
+                                </td>
+                                <td>{{ item.product.precio }} €</td>
+                                <td>
+                                    <input type="number" name="quantity[{{ item.key }}]" value="{{ item.quantity }}" min="1" class="cart-qty-input">
+                                </td>
+                                <td>{{ item.total }} €</td>
+                                <td>
+                                    <a href="#" class="btn-remove">Eliminar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                <div class="cart-summary">
+                    <div class="total-row">
+                        <span>Total:</span>
+                        <span class="total-price">{{ total }} €</span>
+                    </div>
+                    <div class="cart-actions">
+                        <a href="{{ path('camisetes') }}" class="btn-continue">Continuar comprant</a>
+                        <button type="submit" class="btn-checkout">Tramitar comanda</button>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+    </div>
 {% endblock %}

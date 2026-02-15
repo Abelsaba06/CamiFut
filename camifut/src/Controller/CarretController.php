@@ -24,8 +24,31 @@ final class CarretController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(): Response
     {
+        $cart = $this->cart->getCart();
+        $cartItems = [];
+        $total = 0;
+
+        foreach ($cart as $key => $item) {
+            $product = $this->repository->find($item['id']);
+            if ($product) {
+                $itemTotal = $product->getPrecio() * $item['quantity'];
+                $total += $itemTotal;
+
+                $cartItems[] = [
+                    'key' => $key,
+                    'product' => $product,
+                    'quantity' => $item['quantity'],
+                    'size' => $item['size'],
+                    'personalization' => $item['personalization'],
+                    'patches' => $item['patches'],
+                    'total' => $itemTotal
+                ];
+            }
+        }
+
         return $this->render('cart/index.html.twig', [
-            'controller_name' => 'CartController',
+            'items' => $cartItems,
+            'total' => $total
         ]);
     }
     #[Route('/cart/add/{id}', name: 'cart_add', methods: ['POST', 'GET'])]

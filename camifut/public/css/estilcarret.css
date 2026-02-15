@@ -1,0 +1,143 @@
+/* Cart Container */
+.cart-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.cart-container h1 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--color-primario);
+}
+
+/* Empty Cart */
+.empty-cart {
+    text-align: center;
+    padding: 3rem;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* Cart Table */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.cart-table th {
+    background-color: var(--color-primario);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Product Info */
+.product-cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cart-product-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+}
+
+.cart-product-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+}
+
+.cart-product-info p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Details */
+.details-cell p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+/* Quantity Input */
+.cart-qty-input {
+    width: 60px;
+    padding: 5px;
+    border: 2px solid #000;
+    text-align: center;
+}
+
+/* Actions */
+.btn-remove {
+    color: #ef4444;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.btn-remove:hover {
+    color: #dc2626;
+}
+
+/* Summary */
+.cart-summary {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: right;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+.total-row {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--color-primario);
+}
+
+.cart-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.btn-continue,
+.btn-checkout {
+    padding: 10px 20px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+    transition: transform 0.1s;
+    cursor: pointer;
+}
+
+.btn-continue {
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-checkout {
+    background-color: var(--color-boton);
+    color: #000;
+}
+
+.btn-continue:hover,
+.btn-checkout:hover {
+    transform: translateY(-2px);
+}
