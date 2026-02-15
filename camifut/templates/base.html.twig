@@ -20,7 +20,7 @@
                     <ul>
                         <li><a href="{{ path('index') }}">Inicio</a></li>
                         <li><a href="{{ path('camisetes') }}">Camisetes</a></li>
-                        <li><a href="{{ path('index') }}">Carrito</a></li>
+                        <li><a href="{{ path('index') }}">Carret</a></li>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li><a href="{{ path('logout') }}">Tancar sesió</a></li>
                             {% if is_granted('ROLE_ADMIN') %}

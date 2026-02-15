@@ -2,7 +2,8 @@
 
 /* 1. Cercador (Barra Grisa) */
 .search-section {
-    background-color: #cbd5e1; /* Gris mitjà del wireframe */
+    background-color: #cbd5e1;
+    /* Gris mitjà del wireframe */
     border-bottom: 2px solid #000;
     padding: 20px 0;
     margin-bottom: 40px;
@@ -20,7 +21,8 @@
     padding: 10px;
     font-family: 'Rajdhani', sans-serif;
     font-size: 1.1rem;
-    border-radius: 0; /* Vores quadrades estil wireframe */
+    border-radius: 0;
+    /* Vores quadrades estil wireframe */
 }
 
 /* 2. Graella de Productes (Fent les targetes GRANS) */
@@ -28,8 +30,9 @@
     display: grid;
     /* Això crea columnes que mesuren MÍNIM 280px. 
        Si la pantalla és gran, s'estiren per a ocupar l'espai. */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 30px; /* Espai entre targetes */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    /* Espai entre targetes */
     padding: 10px;
 }
 
@@ -44,7 +47,8 @@
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 5px 5px 0px rgba(0,0,0,1); /* Ombra dura negra */
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
+    /* Ombra dura negra */
 }
 
 .product-link {
@@ -57,8 +61,10 @@
 
 /* Contenidor de la imatge (Fent-lo alt) */
 .card-image-container {
-    background-color: #f1f5f9; /* Gris molt claret */
-    height: 300px; /* Altura fixa gran perquè la samarreta es veja bé */
+    background-color: #f1f5f9;
+    /* Gris molt claret */
+    height: 300px;
+    /* Altura fixa gran perquè la samarreta es veja bé */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,12 +73,15 @@
     font-weight: bold;
     color: #64748b;
 }
+
 /*Estils per a la imatge que es mostra en la targeta*/
-.card-image-container img{
+.card-image-container img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: cover; /*Això fa que la imatge es mostri bé*/
+    object-fit: cover;
+    /*Això fa que la imatge es mostri bé*/
 }
+
 /* Informació de la targeta */
 .card-info {
     padding: 20px;
@@ -91,7 +100,8 @@
 }
 
 .price-tag {
-    font-size: 1.8rem; /* Preu gran */
+    font-size: 1.8rem;
+    /* Preu gran */
     font-weight: 600;
     color: #000;
     margin-bottom: 15px;
@@ -111,4 +121,8 @@
 
 .btn-buy:hover {
     background-color: var(--color-boton-hover);
+}
+
+.hidden {
+    display: none;
 }
