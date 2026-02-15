@@ -27,14 +27,14 @@
                     <tbody>
                         {% for item in items %}
                             <tr>
-                                <td class="product-cell">
+                                <td class="product-cell" data-label="Producte">
                                     <img src="{{ asset('img/' ~ item.product.imagen) }}" alt="{{ item.product.equipo }}" class="cart-product-img">
                                     <div class="cart-product-info">
                                         <h3>{{ item.product.equipo }}</h3>
                                         <p>{{ item.product.temporada }}</p>
                                     </div>
                                 </td>
-                                <td class="details-cell">
+                                <td class="details-cell" data-label="Detalls">
                                     <p><strong>Talla:</strong> {{ item.size }}</p>
                                     {% if item.personalization %}
                                         <p><strong>Personalització:</strong> {{ item.personalization }}</p>
@@ -43,13 +43,14 @@
                                         <p><strong>Parche:</strong> {{ item.patches }}</p>
                                     {% endif %}
                                 </td>
-                                <td>{{ item.product.precio }} €</td>
-                                <td>
+                                <td data-label="Preu">{{ item.product.precio }} €</td>
+                                <td data-label="Quantitat">
                                     <input type="number" name="quantity[{{ item.key }}]" value="{{ item.quantity }}" min="1" class="cart-qty-input">
                                 </td>
-                                <td>{{ item.total }} €</td>
-                                <td>
-                                    <a href="#" class="btn-remove">Eliminar</a>
+                                <td data-label="Total">{{ item.total }} €</td>
+                                <td data-label="Accions">
+                                    <a href="{{ path('cart_remove', {'id': item.key}) }}" class="btn-remove">Eliminar</a><br>
+                                    <a href="{{ path('cart_update', {'id': item.key}) }}" class="btn-update">Actualitzar</a>
                                 </td>
                             </tr>
                         {% endfor %}

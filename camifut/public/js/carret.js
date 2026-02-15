@@ -43,3 +43,23 @@ if (addToCartBtn) {
             })
     };
 }
+
+// Update cart logic
+document.querySelectorAll('.btn-update').forEach(btn => {
+    btn.onclick = function (e) {
+        e.preventDefault();
+
+        // Find the quantity input in the same row
+        let row = this.closest('tr');
+        let quantityInput = row.querySelector('.cart-qty-input');
+        let quantity = quantityInput.value;
+
+        // Get the base update URL from the href attribute
+        let updateUrl = this.getAttribute('href');
+
+        // Construct the new URL with the quantity parameter
+        // The controller expects /cart/update/{id}?quantity={quantity}
+        // distinct from the current href which is just /cart/update/{id}
+        window.location.href = `${updateUrl}?quantity=${quantity}`;
+    };
+});

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Service\CarretService;
 use App\Entity\Camiseta;
+use Symfony\Component\HttpFoundation\Request;
 
 final class CarretController extends AbstractController
 {
@@ -52,7 +53,7 @@ final class CarretController extends AbstractController
         ]);
     }
     #[Route('/cart/add/{id}', name: 'cart_add', methods: ['POST', 'GET'])]
-    public function cart_add(int $id, \Symfony\Component\HttpFoundation\Request $request): Response
+    public function cart_add(int $id, Request $request): Response
     {
         $product = $this->repository->find($id);
         if (!$product)
@@ -68,5 +69,19 @@ final class CarretController extends AbstractController
         // Return the full cart or just success. For now, sending the updated cart count for this item type might be complex due to the key.
         // Let's just return success and the total cart dump for debugging if needed, or just a success message.
         return new JsonResponse(["status" => "success", "message" => "Added to cart"], Response::HTTP_OK);
+    }
+    #[Route('/cart/remove/{id}', name: 'cart_remove', methods: ['POST', 'GET'])]
+    public function cart_remove(string $id): Response
+    {
+        $this->cart->remove($id);
+        // If we want to stay on the page, instead of JSON response, we should redirect to cart index.
+        return $this->redirectToRoute('app_cart');
+    }
+    #[Route('/cart/update/{id}', name: 'cart_update', methods: ['POST', 'GET'])]
+    public function cart_update(string $id, Request $request): Response
+    {
+        $quantity = $request->query->getInt('quantity', 1);
+        $this->cart->update($id, $quantity);
+        return $this->redirectToRoute('app_cart');
     }
 }

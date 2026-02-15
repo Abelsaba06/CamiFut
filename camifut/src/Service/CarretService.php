@@ -49,4 +49,10 @@ class CarretService
         unset($cart[$uniqueKey]);
         $this->getSession()->set(self::KEY, $cart);
     }
+    public function update(string $uniqueKey, int $quantity)
+    {
+        $cart = $this->getCart();
+        $cart[$uniqueKey]['quantity'] = $quantity;
+        $this->getSession()->set(self::KEY, $cart);
+    }
 }
