@@ -63,23 +63,21 @@
                 </div>
                 <h3>Parches:</h3>
                 <div class="size-selector">
-                    <select class="custom-input" style="width: auto;">
-                        <option>Lliga</option>
-                        <option>Competició Europa</option>
-                        <option>Sense parche</option>
+                    <select id="parches-select" class="custom-input" style="width: auto;">
+                        <option value="Lliga">Lliga</option>
+                        <option value="Competició Europa">Competició Europa</option>
+                        <option value="Sense parche">Sense parche</option>
                     </select>
                 </div>
                 <div class="custom-form">
                     <p>Camiseta personalitzada</p>
-                    <input type="text" placeholder="Nombre" class="custom-input">
-                    <input type="number" placeholder="Dorsal" class="custom-input">
+                    <input type="text" id="custom-name" placeholder="Nombre" class="custom-input">
+                    <input type="number" id="custom-number" placeholder="Dorsal" class="custom-input">
                 </div>
                 <div class="action-buttons">
-                    <input type="number" placeholder="Quantitat" class="custom-input" value="1">
-                    <button class="btn-primary">Afegeix al carret</button>
-
+                    <input type="number" id="quantity" placeholder="Quantitat" class="custom-input" value="1" min="1">
+                    <button id="add-to-cart-btn" class="btn-primary" data-id="{{ camiseta.id }}">Afegeix al carret</button>
                 </div>
-
             </div>  
         </div>
     </main>

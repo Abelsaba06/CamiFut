@@ -21,19 +21,32 @@ class CarretService
     {
         return $this->getSession()->get(self::KEY, []);
     }
-    public function add(int $id, int $quantity = 1)
+    public function add(int $id, int $quantity = 1, string $size = '', string $personalization = '', string $patches = '')
     {
-        //https://symfony.com/doc/current/session.html
         $cart = $this->getCart();
-        //Sólo añadimos si no lo está 
-        if (!array_key_exists($id, $cart))
-            $cart[$id] = $quantity;
+
+        // Create a unique key for this combination of product + options
+        $uniqueKey = md5($id . $size . $personalization . $patches);
+
+        if (!array_key_exists($uniqueKey, $cart)) {
+            $cart[$uniqueKey] = [
+                'id' => $id,
+                'quantity' => 0,
+                'size' => $size,
+                'personalization' => $personalization,
+                'patches' => $patches
+            ];
+        }
+
+        $cart[$uniqueKey]['quantity'] += $quantity;
+
         $this->getSession()->set(self::KEY, $cart);
     }
-    public function remove(int $id)
+
+    public function remove(string $uniqueKey)
     {
         $cart = $this->getCart();
-        unset($cart[$id]);
+        unset($cart[$uniqueKey]);
         $this->getSession()->set(self::KEY, $cart);
     }
 }
