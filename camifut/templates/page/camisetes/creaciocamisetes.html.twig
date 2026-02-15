@@ -1,9 +1,25 @@
+{# Hereta l'estructura base (capçalera, peu de pàgina, etc.) #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Camisetas - CamiFut{% endblock %}
+{# Defineix el títol específic per a aquesta pàgina #}
+{% block title %}Camisetes - CamiFut{% endblock %}
 
 {% block body %}
-{{form_start(camisetaform)}}
-{{form_widget(camisetaform)}}
-{{form_end(camisetaform)}}
+    {# 
+       Inici del formulari: genera l'etiqueta <form> 
+       i gestiona automàticament l'atribut 'enctype' si hi ha pujada de fitxers.
+    #}
+    {{ form_start(camisetaform) }}
+
+    {# 
+       Renderitza tots els camps del formulari (inputs, selects, labels i errors)
+       de forma automàtica segons la configuració del FormType en PHP.
+    #}
+    {{ form_widget(camisetaform) }}
+
+    {# 
+       Tancament del formulari: genera l'etiqueta </form> 
+       i inclou els camps ocults de seguretat (token CSRF).
+    #}
+    {{ form_end(camisetaform) }}
 {% endblock %}

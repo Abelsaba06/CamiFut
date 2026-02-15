@@ -1,21 +1,29 @@
+{# Hereta l'estructura base del lloc web #}
 {% extends 'base.html.twig' %}
 
+{# El títol de la pàgina serà el nom de l'equip de la camiseta #}
 {% block title %}{{ camiseta.equipo }}{% endblock %}
 
 {% block body %}
     <main>
         <div class="product-details">
-                <h1>{{ camiseta.equipo }} {{camiseta.temporada}}</h1>
-                <h2 style="color: #333;">Preu: {{ camiseta.precio }} €</h2>
-            </div>
-            {# COLUMNA IZQUIERDA: IMAGEN #}
-            <div class="product-image">
-                {# Asumiendo que guardas las imágenes en public/uploads o similar #}
-                <img src="{{ asset('img/' ~ (camiseta.categoria ? camiseta.categoria.nombre ~ '/' : '') ~ camiseta.imagen) }}" alt="{{ camiseta.equipo }}" style="max-width: 100%; height: auto;">
-            </div>
-            {# COLUMNA DERECHA: DETALLES #}
+            {# Títol principal amb l'equip i la temporada #}
+            <h1>{{ camiseta.equipo }} {{ camiseta.temporada }}</h1>
+            <h2 style="color: #333;">Preu: {{ camiseta.precio }} €</h2>
+        </div>
+
+        {# COLUMNA ESQUERRA: IMATGE DEL PRODUCTE #}
+        <div class="product-image">
+            {# Generem la ruta de la imatge dinàmicament segons la categoria i el fitxer #}
+            <img src="{{ asset('img/' ~ (camiseta.categoria ? camiseta.categoria.nombre ~ '/' : '') ~ camiseta.imagen) }}" 
+                 alt="{{ camiseta.equipo }}" 
+                 style="max-width: 100%; height: auto;">
+        </div>
+
+        {# COLUMNA DRETA: DETALLES I CONFIGURACIÓ #}
+        <div class="product-container">
             
-            <div class="product-container">
+            {# Guia de talles per a l'usuari #}
             <div class="size-guide">
                 <h3>Medida de les talles</h3>
                 <br>
@@ -36,31 +44,28 @@
                         <tr><td>3XL</td><td>62</td><td>79</td></tr>
                     </tbody>
                 </table>
-        </div>
-        <div class="product-details">
+            </div>
 
+            <div class="product-details">
+                {# Selector de talles (botons interactius) #}
                 <h3>Talla (elegida)</h3>
-
                 <div class="size-selector">
-
                     <button class="size-btn">S</button>
-
                     <button class="size-btn">M</button>
-
-                    <button class="size-btn active">L</button> <button class="size-btn">XL</button>
-
+                    <button class="size-btn active">L</button> 
+                    <button class="size-btn">XL</button>
                     <button class="size-btn">2XL</button>
-
                     <button class="size-btn">3XL</button>
-
                 </div>
 
-
+                {# Opcions de personalització de nom i dorsal #}
                 <h3>Personalització</h3>
                 <div class="size-selector">
                     <button class="option-btn personalitzacio-btn active">Personalitzar</button>
                     <button class="option-btn">No personalitzar</button>
                 </div>
+
+                {# Selecció de parches oficials #}
                 <h3>Parches:</h3>
                 <div class="size-selector">
                     <select id="parches-select" class="custom-input" style="width: auto;">
@@ -69,11 +74,15 @@
                         <option value="Sense parche">Sense parche</option>
                     </select>
                 </div>
+
+                {# Formulari que es mostra/amaga per a posar el nom i el número #}
                 <div class="custom-form">
                     <p>Camiseta personalitzada</p>
-                    <input type="text" id="custom-name" placeholder="Nombre" class="custom-input">
+                    <input type="text" id="custom-name" placeholder="Nom" class="custom-input">
                     <input type="number" id="custom-number" placeholder="Dorsal" class="custom-input">
                 </div>
+
+                {# Accions final de compra: quantitat i botó d'afegir #}
                 <div class="action-buttons">
                     <input type="number" id="quantity" placeholder="Quantitat" class="custom-input" value="1" min="1">
                     <button id="add-to-cart-btn" class="btn-primary" data-id="{{ camiseta.id }}">Afegeix al carret</button>

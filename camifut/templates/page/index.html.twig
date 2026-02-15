@@ -1,14 +1,28 @@
+{# Hereta la l'estructura principal de 'base.html.twig' #}
 {% extends 'base.html.twig' %}
+
+{# Defineix el títol de la pestanya de la pàgina #}
 {% block title %}Camifut{% endblock %}
+
+{# Contingut principal de la pàgina #}
 {% block body %}
     <main>
+        {# Secció del bàner principal amb la benvinguda #}
         <section class="hero-banner">
             <h1>Benvinguts a CamiFut</h1>
-            <p>(Xicoteta descripció explicant el temps de duració del envio de camisetes)</p>
+            <p>Viu el futbol com es mereix. Camisetes de qualitat, amb estil i passió, disponibles només a la Comunitat Valenciana i Catalunya. Tria la teua i anima el teu equip com mai.</p>
         </section>
+
+        {# Graella de categories que es generen dinàmicament #}
         <section class="category-grid">
+        {# Recorrem la llista de categories que arriba del controlador #}
         {% for categoria in categorias %}
-            <div class="category-card"><a href="{{path('categoria', {'nombre': categoria.nombre})}}">{{categoria.nombre}}</a></div> 
+            <div class="category-card">
+                {# Enllaç a la ruta de la categoria utilitzant el seu nom com a paràmetre #}
+                <a href="{{ path('categoria', {'nombre': categoria.nombre}) }}">
+                    {{ categoria.nombre }}
+                </a>
+            </div> 
         {% endfor %}
         </section>
     </main>

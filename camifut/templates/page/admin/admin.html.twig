@@ -1,19 +1,38 @@
+{# Hereta l'estructura base del lloc web per a l'administració #}
 {% extends 'base.html.twig' %}
+
+{# Títol de la pestanya per a la secció de gestió #}
 {% block title %}Zona Admin{% endblock %}
+
 {% block body %}
     <main>
+        {# SECCIÓ DE GESTIÓ DE CATEGORIES #}
         <section class="category-grid">
+            {# Recorrem totes les categories existents a la base de dades #}
             {% for categoria in categorias %}
-                <div class="category-card">{{categoria.nombre}}</div> 
+                <div class="category-card">{{ categoria.nombre }}</div> 
             {% endfor %}
-            <div class="category-card"><button id="crearCategoria">Crear Categoria</button></div> 
+            
+            {# Botó per a activar la creació d'una nova categoria (gestionat via JS) #}
+            <div class="category-card">
+                <button id="crearCategoria">Crear Categoria</button>
+            </div> 
+            
+            {# Contenidor buit on s'injectarà el formulari de creació dinàmicament #}
             <div id="categoriaparacrear"></div>
         </section>
+
+        {# SECCIÓ DE GESTIÓ DE CAMISETES #}
         <section class="category-grid">
+            {# Mostrem el nom de cada equip que ja està registrat #}
             {% for camiseta in camisetas %}
-                <div class="category-card">{{camiseta.equipo}}</div> 
+                <div class="category-card">{{ camiseta.equipo }}</div> 
             {% endfor %}
-            <div class="category-card"><a href="{{path('crearCamiseta')}}">Crear Camiseta</a></div> 
+            
+            {# Enllaç directe a la ruta de Symfony per a crear una nova camiseta #}
+            <div class="category-card">
+                <a href="{{ path('crearCamiseta') }}">Crear Camiseta</a>
+            </div> 
         </section>
     </main>
 {% endblock %}

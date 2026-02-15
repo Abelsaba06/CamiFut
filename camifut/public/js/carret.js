@@ -5,17 +5,17 @@ if (addToCartBtn) {
         let quantity = document.getElementById('quantity').value;
         let patches = document.getElementById('parches-select').value;
 
-        // Get selected size
+        // Obtindre la talla seleccionada
         let size = '';
         let activeSizeBtn = document.querySelector('.size-btn.active');
         if (activeSizeBtn) {
             size = activeSizeBtn.innerText;
         } else {
-            alert('Por favor, selecciona una talla.');
+            alert('Per favor, selecciona una talla.');
             return;
         }
 
-        // Get personalization
+        // Obtindre la personalització
         let personalization = '';
         let isCustom = document.querySelector('.personalitzacio-btn').classList.contains('active');
         if (isCustom) {
@@ -26,40 +26,32 @@ if (addToCartBtn) {
             }
         }
 
-        // Construct URL with query parameters
+        // Construir la URL amb els paràmetres de consulta
         let url = `/cart/add/${productId}?quantity=${quantity}&size=${encodeURIComponent(size)}&personalization=${encodeURIComponent(personalization)}&patches=${encodeURIComponent(patches)}`;
 
         fetch(url, {
             method: 'POST'
         })
             .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Producto añadido al carrito!');
-                    // Optional: Update cart counter in header if it exists
-                } else {
-                    alert('Error al añadir al carrito');
-                }
-            })
     };
 }
 
-// Update cart logic
+// Lògica per a actualitzar el carret
 document.querySelectorAll('.btn-update').forEach(btn => {
     btn.onclick = function (e) {
         e.preventDefault();
 
-        // Find the quantity input in the same row
+        // Buscar l'entrada de quantitat en la mateixa fila
         let row = this.closest('tr');
         let quantityInput = row.querySelector('.cart-qty-input');
         let quantity = quantityInput.value;
 
-        // Get the base update URL from the href attribute
+        // Obtindre la URL base d'actualització des de l'atribut href
         let updateUrl = this.getAttribute('href');
 
-        // Construct the new URL with the quantity parameter
-        // The controller expects /cart/update/{id}?quantity={quantity}
-        // distinct from the current href which is just /cart/update/{id}
+        // Construir la nova URL amb el paràmetre de quantitat
+        // El controlador espera /cart/update/{id}?quantity={quantity}
+        // a diferència de l'href actual que és només /cart/update/{id}
         window.location.href = `${updateUrl}?quantity=${quantity}`;
     };
 });

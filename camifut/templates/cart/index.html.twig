@@ -1,17 +1,22 @@
+{# Hereta l'estructura base del lloc web #}
 {% extends 'base.html.twig' %}
 
+{# Títol de la pestanya per al carret de la compra #}
 {% block title %}El teu carret - CamiFut{% endblock %}
 
 {% block body %}
     <div class="cart-container">
         <h1>El teu carret</h1>
         
+        {# Comprovem si el carret no té cap element #}
         {% if items is empty %}
             <div class="empty-cart">
                 <p>El teu carret està buit.</p>
+                {# Enllaç per a tornar a la llista de productes #}
                 <a href="{{ path('camisetes') }}" class="btn-primary">Veure camisetes</a>
             </div>
         {% else %}
+            {# Formulari per a gestionar les quantitats i actualitzacions del carret #}
             <form action="#" method="post">
                 <table class="cart-table">
                     <thead>
@@ -25,8 +30,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {# Recorrem cada element emmagatzemat en la sessió del carret #}
                         {% for item in items %}
                             <tr>
+                                {# Informació visual del producte #}
                                 <td class="product-cell" data-label="Producte">
                                     <img src="{{ asset('img/' ~ (item.product.categoria ? item.product.categoria.nombre ~ '/' : '') ~ item.product.imagen) }}" alt="{{ item.product.equipo }}" class="cart-product-img">
                                     <div class="cart-product-info">
@@ -34,20 +41,33 @@
                                         <p>{{ item.product.temporada }}</p>
                                     </div>
                                 </td>
+
+                                {# Detalls de la personalització (talla, nom/dorsal i parches) #}
                                 <td class="details-cell" data-label="Detalls">
                                     <p><strong>Talla:</strong> {{ item.size }}</p>
+                                    
+                                    {# Mostra la personalització només si existeix #}
                                     {% if item.personalization %}
                                         <p><strong>Personalització:</strong> {{ item.personalization }}</p>
                                     {% endif %}
+                                    
+                                    {# Mostra el parche només si no és l'opció per defecte #}
                                     {% if item.patches and item.patches != 'Sense parche' %}
                                         <p><strong>Parche:</strong> {{ item.patches }}</p>
                                     {% endif %}
                                 </td>
+
                                 <td data-label="Preu">{{ item.product.precio }} €</td>
+
+                                {# Control de quantitat per a cada producte #}
                                 <td data-label="Quantitat">
                                     <input type="number" name="quantity[{{ item.key }}]" value="{{ item.quantity }}" min="1" class="cart-qty-input">
                                 </td>
+
+                                {# Preu total de la línia (preu unitari x quantitat) #}
                                 <td data-label="Total">{{ item.total }} €</td>
+
+                                {# Botons per a gestionar l'estat del carret #}
                                 <td data-label="Accions">
                                     <p><a href="{{ path('cart_remove', {'id': item.key}) }}" class="btn-remove">Eliminar</a></p>
                                     <p><a href="{{ path('cart_update', {'id': item.key}) }}" class="btn-update">Actualitzar</a></p>
@@ -57,14 +77,19 @@
                     </tbody>
                 </table>
                 
+                {# Resum final de la compra #}
                 <div class="cart-summary">
                     <div class="total-row">
                         <span>Total:</span>
                         <span class="total-price">{{ total }} €</span>
                     </div>
                     <div class="cart-actions">
+                        {# Botons de navegació final #}
                         <a href="{{ path('camisetes') }}" class="btn-continue">Continuar comprant</a>
-                        <button type="submit" class="btn-checkout"><a href="{{ path('cart_tramitarcompra') }}">Tramitar comanda</a></button>
+                        {# Enllaç per a procedir a la passarel·la de pagament #}
+                        <button type="submit" class="btn-checkout">
+                            <a href="{{ path('cart_tramitarcompra') }}">Tramitar comanda</a>
+                        </button>
                     </div>
                 </div>
             </form>

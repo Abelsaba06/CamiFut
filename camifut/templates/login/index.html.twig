@@ -1,17 +1,33 @@
+{# Hereta l'estructura base del lloc web #}
 {% extends 'base.html.twig' %}
 
+{# Defineix el títol de la pàgina d'accés #}
 {% block title %}Login{% endblock %}
 
 {% block body %}
- <form action="{{ path('login') }}" method="post" class="styled-form">
+    {# 
+       Formulari d'inici de sessió. 
+       L'action apunta a la ruta 'login' (on Symfony gestiona l'autenticació) 
+       i el mètode ha de ser necessàriament 'post'.
+    #}
+    <form action="{{ path('login') }}" method="post" class="styled-form">
+        
+        {# Camp per a l'identificador de l'usuari (en aquest cas, l'email) #}
         <label for="username">Email:</label>
+        {# 'last_username' permet carregar l'últim email introduït si hi ha hagut un error #}
         <input type="text" id="username" name="_username" value="{{ last_username }}"/>
 
-        <label for="password">Password:</label>
+        {# Camp per a la contrasenya #}
+        <label for="password">Contrasenya:</label>
         <input type="password" id="password" name="_password"/>
 
+        {# 
+           Camp ocult que indica a Symfony on ha de redirigir l'usuari 
+           una vegada el login s'haja completat amb èxit (en aquest cas, a l'índex).
+        #}
         <input type="hidden" name="_target_path" value="{{ path('index') }}"/>
 
-        <button type="submit">login</button>
+        {# Botó per a enviar el formulari #}
+        <button type="submit">Iniciar sessió</button>
     </form>
 {% endblock %}

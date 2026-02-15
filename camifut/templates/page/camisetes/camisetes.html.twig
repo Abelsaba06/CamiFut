@@ -1,12 +1,17 @@
+{# Hereta l'estructura base del lloc web (base.html.twig) #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Camisetas - CamiFut{% endblock %}
+{# Títol de la pestanya del navegador #}
+{% block title %}Camisetes - CamiFut{% endblock %}
 
 {% block body %}
     
+    {# Secció del cercador #}
     <section class="search-section">
         <div class="container">
+            {# Formulari de cerca que envia les dades per GET a la ruta 'buscar' #}
             <form action="{{ path('buscar') }}" method="get" class="search-form">
+                {# Input per a introduir el text de cerca #}
                 <input type="text" name="searchTerm" placeholder="Buscar camiseta" class="form-control search-input">
                 <button type="submit" class="btn btn-primary-camifut">Buscar</button>
             </form>
@@ -15,20 +20,29 @@
 
     <main class="container my-5">
         
+        {# Graella on es mostraran totes les camisetes #}
         <div class="products-grid">
+            {# Bucle per a recórrer cada producte de la llista 'camisetas' #}
             {% for producto in camisetas %}
                 <article class="product-card">
+                    {# Enllaç als detalls de la camiseta basat en el nom de l'equip #}
                     <a href="{{ path('camiseta', {'equipo': producto.equipo}) }}" class="product-link">
+                        
+                        {# Contenidor de la imatge del producte #}
                         <div class="card-image-container">
+                            {# Generació de la ruta de la imatge segons la seua categoria #}
                             <img src="{{ asset('img/' ~ (producto.categoria ? producto.categoria.nombre ~ '/' : '') ~ producto.imagen) }}" alt="{{ producto.equipo }}">
                         </div>
+
+                        {# Informació bàsica de la targeta de producte #}
                         <div class="card-info">
                             <h3>{{ producto.equipo }}</h3>
-                            <div class="price-tag">{{ producto.precio }}</div>
+                            <div class="price-tag">{{ producto.precio }} €</div>
                             <button class="btn-buy">Veure Detalls</button>
                         </div>
                     </a>
                 </article>
+            {# Si no hi haguera camisetes, opcionalment podríem posar un {% else %} ací #}
             {% endfor %}
         </div>
     </main>
