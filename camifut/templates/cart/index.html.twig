@@ -49,8 +49,8 @@
                                 </td>
                                 <td data-label="Total">{{ item.total }} €</td>
                                 <td data-label="Accions">
-                                    <a href="{{ path('cart_remove', {'id': item.key}) }}" class="btn-remove">Eliminar</a><br>
-                                    <a href="{{ path('cart_update', {'id': item.key}) }}" class="btn-update">Actualitzar</a>
+                                    <p><a href="{{ path('cart_remove', {'id': item.key}) }}" class="btn-remove">Eliminar</a></p>
+                                    <p><a href="{{ path('cart_update', {'id': item.key}) }}" class="btn-update">Actualitzar</a></p>
                                 </td>
                             </tr>
                         {% endfor %}
