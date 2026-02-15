@@ -1,0 +1,152 @@
+/* Importem les variables i la font del fitxer principal si és necessari, 
+   o assumim que ja estan carregades en el base.html.twig */
+
+/* --- Contenidor Principal del Checkout --- */
+.container {
+    max-width: 800px;
+    /* Amplària més continguda per a un formulari de pagament */
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border: 2px solid #000;
+    /* Vora estil còmic/robust */
+    border-radius: 8px;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.15);
+    /* Ombra sòlida coherent */
+}
+
+/* Títol (si decideixes afegir un h1/h2 dins del main) */
+.container h1 {
+    text-align: center;
+    color: var(--color-primario);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Estructura del Formulari (Grid) --- */
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Dues columnes iguals per defecte */
+    gap: 1.5rem;
+    /* Espai entre camps */
+}
+
+/* --- Grups d'Inputs --- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Fem que certs camps ocupen tota l'amplària (2 columnes) */
+/* Per exemple: Adreça, Email, Nom, Total */
+.form-group:nth-child(1),
+/* Nom */
+.form-group:nth-child(2),
+/* Email */
+.form-group:nth-child(3),
+/* Adreça */
+.form-group:last-of-type {
+    /* Total a pagar */
+    grid-column: 1 / -1;
+    /* Ocupa des de la línia 1 fins al final */
+}
+
+/* Etiquetes (Labels) */
+.form-group label {
+    font-weight: 600;
+    color: var(--color-primario);
+    font-size: 1rem;
+}
+
+/* Inputs */
+.form-group input {
+    padding: 12px;
+    border: 2px solid #cbd5e1;
+    /* Vora grisa suau per defecte */
+    border-radius: 4px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+/* Estat Focus dels Inputs */
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    /* Blau fosc en seleccionar */
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+    /* Resplendor suau */
+}
+
+/* Input de Total a Pagar (Només lectura visual) */
+#totalapagar {
+    background-color: var(--color-secundario);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--color-primario);
+    border-color: var(--color-primario);
+    pointer-events: none;
+    /* Evita que l'usuari escriga, si ho desitges */
+}
+
+/* --- Botó d'Enviament --- */
+.form button[type="submit"] {
+    grid-column: 1 / -1;
+    /* El botó ocupa tota l'amplària */
+    margin-top: 1rem;
+    padding: 15px;
+    background-color: var(--color-boton);
+    /* Groc */
+    color: var(--color-texto-negro);
+    border: 2px solid #000;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+    /* Ombra sòlida */
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.form button[type="submit"]:hover {
+    background-color: var(--color-boton-hover);
+    transform: translateY(-2px);
+    /* Efecte elevació */
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
+}
+
+.form button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 1);
+    /* Efecte pressionar */
+}
+
+/* --- Responsive (Mòbil) --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+        border-width: 1px;
+        /* Vora un poc més fina en mòbil */
+    }
+
+    .form {
+        grid-template-columns: 1fr;
+        /* Una sola columna en mòbil */
+        gap: 1rem;
+    }
+
+    /* En mòbil, ja no necessitem que certs camps expandisquen columnes 
+       perquè tot és 1 columna, però el grid-column: 1/-1 no fa mal */
+
+    .form-group input {
+        padding: 10px;
+        /* Un poc menys de padding per a estalviar espai */
+    }
+}

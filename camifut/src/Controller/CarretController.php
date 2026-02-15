@@ -22,36 +22,13 @@ final class CarretController extends AbstractController
         $this->repository = $doctrine->getRepository(Camiseta::class);
         $this->cart = $cart;
     }
-    #[Route('/cart', name: 'app_cart')]
-    public function index(): Response
+    #[Route('/cart/comprado', name: 'comprado', methods: ['POST', 'GET'])]
+    public function comprado(): Response
     {
-        $cart = $this->cart->getCart();
-        $cartItems = [];
-        $total = 0;
-
-        foreach ($cart as $key => $item) {
-            $product = $this->repository->find($item['id']);
-            if ($product) {
-                $itemTotal = $product->getPrecio() * $item['quantity'];
-                $total += $itemTotal;
-
-                $cartItems[] = [
-                    'key' => $key,
-                    'product' => $product,
-                    'quantity' => $item['quantity'],
-                    'size' => $item['size'],
-                    'personalization' => $item['personalization'],
-                    'patches' => $item['patches'],
-                    'total' => $itemTotal
-                ];
-            }
-        }
-
-        return $this->render('cart/index.html.twig', [
-            'items' => $cartItems,
-            'total' => $total
-        ]);
+        $this->cart->removeAll();
+        return $this->redirectToRoute('index');
     }
+
     #[Route('/cart/add/{id}', name: 'cart_add', methods: ['POST', 'GET'])]
     public function cart_add(int $id, Request $request): Response
     {
@@ -84,4 +61,63 @@ final class CarretController extends AbstractController
         $this->cart->update($id, $quantity);
         return $this->redirectToRoute('app_cart');
     }
+    #[Route('/cart/tramitarcompra', name: 'cart_tramitarcompra', methods: ['POST', 'GET'])]
+    public function cart_tramitarcompra(Request $request): Response
+    {
+        $cart = $this->cart->getCart();
+        $cartItems = [];
+        $total = 0;
+
+        foreach ($cart as $key => $item) {
+            $product = $this->repository->find($item['id']);
+            if ($product) {
+                $itemTotal = $product->getPrecio() * $item['quantity'];
+                $total += $itemTotal;
+                $cartItems[] = [
+                    'key' => $key,
+                    'product' => $product,
+                    'quantity' => $item['quantity'],
+                    'size' => $item['size'],
+                    'personalization' => $item['personalization'],
+                    'patches' => $item['patches'],
+                    'total' => $itemTotal
+                ];
+            }
+        }
+        return $this->render('cart/tramitarcompra.html.twig', [
+            'items' => $cartItems,
+            'total' => $total
+        ]);
+    }
+    #[Route('/cart', name: 'app_cart')]
+    public function index(): Response
+    {
+        $cart = $this->cart->getCart();
+        $cartItems = [];
+        $total = 0;
+
+        foreach ($cart as $key => $item) {
+            $product = $this->repository->find($item['id']);
+            if ($product) {
+                $itemTotal = $product->getPrecio() * $item['quantity'];
+                $total += $itemTotal;
+
+                $cartItems[] = [
+                    'key' => $key,
+                    'product' => $product,
+                    'quantity' => $item['quantity'],
+                    'size' => $item['size'],
+                    'personalization' => $item['personalization'],
+                    'patches' => $item['patches'],
+                    'total' => $itemTotal
+                ];
+            }
+        }
+
+        return $this->render('cart/index.html.twig', [
+            'items' => $cartItems,
+            'total' => $total
+        ]);
+    }
+
 }
