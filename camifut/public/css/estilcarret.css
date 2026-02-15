@@ -86,7 +86,7 @@
 /* Actions */
 .btn-remove {
     color: #ef4444;
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: 500;
 }
 

@@ -26,7 +26,7 @@
             {% for producto in camisetas %}
                 <article class="product-card">
                     {# Enllaç als detalls de la camiseta basat en el nom de l'equip #}
-                    <a href="{{ path('camiseta', {'equipo': producto.equipo}) }}" class="product-link">
+                    <a href="{{ path('camiseta', {'equipo': producto.equipo, 'temporada': producto.temporada}) }}" class="product-link">
                         
                         {# Contenidor de la imatge del producte #}
                         <div class="card-image-container">

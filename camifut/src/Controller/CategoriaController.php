@@ -13,18 +13,10 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use Symfony\Component\Filesystem\Filesystem;
+
 final class CategoriaController extends AbstractController
 {
-    #[Route('/buscar', name: 'buscar')]
-    public function buscar(CamisetaRepository $camisetaRepository, Request $request): Response
-    {
-        $searchTerm = $request->query->get('searchTerm', '');
-        $camisetes = $camisetaRepository->findByText($searchTerm);
-        return $this->render('page/camisetes/camisetes.html.twig', [
-            'camisetas' => $camisetes
-        ]);
-    }
-
     #[Route('/categoria/crear', name: 'crearCotegoria')]
     public function nuevaCategoria(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
@@ -33,7 +25,22 @@ final class CategoriaController extends AbstractController
         $categoria->setNombre($data['nombre']);
         $entityManager->persist($categoria);
         $entityManager->flush();
+
+        // Crear carpeta automàticament
+        $filesystem = new Filesystem();
+        $projectDir = $this->getParameter('kernel.project_dir');
+        $filesystem->mkdir($projectDir . '/public/img/' . $data['nombre']);
+
         return new JsonResponse($categoria->getId());
+    }
+    #[Route('/buscar', name: 'buscar')]
+    public function buscar(CamisetaRepository $camisetaRepository, Request $request): Response
+    {
+        $searchTerm = $request->query->get('searchTerm', '');
+        $camisetes = $camisetaRepository->findByText($searchTerm);
+        return $this->render('page/camisetes/camisetes.html.twig', [
+            'camisetas' => $camisetes
+        ]);
     }
     #[Route('/categoria/{nombre}', name: 'categoria')]
     public function index(CategoriaRepository $categoriaRepository, string $nombre, CamisetaRepository $camisetaRepository): Response

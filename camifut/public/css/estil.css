@@ -38,6 +38,19 @@ body {
     /* Ocupa tota l’alçada de la finestra */
 }
 
+/* Estils generals per als enllaços (sense blau ni subratllat) */
+a {
+    text-decoration: none !important;
+    /* Sense subratllat */
+    color: inherit !important;
+    /* Color heretat */
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-boton-hover);
+}
+
 /* --- Capçalera i navegació --- */
 header {
     background-color: var(--color-primario);
