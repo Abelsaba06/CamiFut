@@ -15,6 +15,15 @@ class CamisetaRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Camiseta::class);
     }
+    public function findByText(string $searchTerm): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere("p.equipo LIKE :val")
+            ->setParameter('val', $searchTerm . '%')
+            ->orderBy('p.equipo', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Camiseta[] Returns an array of Camiseta objects

@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class CamisetaController extends AbstractController
 {
+
     #[Route(path: "/crear/camiseta", name: "crearCamiseta")]
     public function crearCamiseta(Request $request, EntityManagerInterface $entityManager, CamisetaFormType $camisetaform): Response
     {
@@ -31,15 +32,15 @@ final class CamisetaController extends AbstractController
     #[Route(path: '/camisetes', name: 'camisetes')]
     public function camisetes(CamisetaRepository $camisetaRepository): Response
     {
-        $camisetas = $camisetaRepository->findAll();
+        $camisetes = $camisetaRepository->findAll();
         return $this->render('page/camisetes/camisetes.html.twig', [
-            'camisetas' => $camisetas
+            'camisetas' => $camisetes
         ]);
     }
-    #[Route('/camiseta/{id}', name: 'camiseta')]
-    public function index(int $id, CamisetaRepository $camisetaRepository): Response
+    #[Route('/camiseta/{equipo}', name: 'camiseta')]
+    public function index(string $equipo, CamisetaRepository $camisetaRepository): Response
     {
-        $camiseta = $camisetaRepository->find($id);
+        $camiseta = $camisetaRepository->findOneBy(['equipo' => $equipo]);
         return $this->render('page/camisetes/detall.html.twig', [
             'camiseta' => $camiseta
         ]);

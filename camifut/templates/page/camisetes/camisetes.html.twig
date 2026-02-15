@@ -6,8 +6,8 @@
     
     <section class="search-section">
         <div class="container">
-            <form action="#" method="get" class="search-form">
-                <input type="text" name="q" placeholder="Buscar camiseta (ej: Barça, Madrid, Retro...)" class="form-control search-input">
+            <form action="{{ path('buscar') }}" method="get" class="search-form">
+                <input type="text" name="searchTerm" placeholder="Buscar camiseta" class="form-control search-input">
                 <button type="submit" class="btn btn-primary-camifut">Buscar</button>
             </form>
         </div>
@@ -18,7 +18,7 @@
         <div class="products-grid">
             {% for producto in camisetas %}
                 <article class="product-card">
-                    <a href="{{ path('camiseta', {'id': producto.id}) }}" class="product-link">
+                    <a href="{{ path('camiseta', {'equipo': producto.equipo}) }}" class="product-link">
                         <div class="card-image-container">
                             <img src="{{ asset('img/' ~ producto.imagen) }}" alt="{{ producto.equipo }}">
                         </div>
